@@ -7,6 +7,7 @@ public class player : MonoBehaviour
 {
     public bool IsGrounded;
     public bool isTake;
+    bool isGodMode;
     GameObject[] allTakeable;
     GameObject closetBall;
     GameObject newBall;
@@ -17,6 +18,7 @@ public class player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        setIsGodMode(false);    //預設關閉球神模式
         setIsTake(false);       //預設未持球
         setIsGround(true);      //預設Player在地面
         refresh_allTakeable();  //初始時更新可撿拾物清單
@@ -54,6 +56,18 @@ public class player : MonoBehaviour
         flipSpriteByDirect(direct);     //依據輸入的方向，決定是否要翻轉spriteX軸
         addForceToPlayer(direct);       //給予player移動量
         dectedBreakAnimator(direct);    //依據輸入方向，決定是否撥放煞車動作
+    }
+    public void chageMode()
+    {
+        if (isGodMode)
+        {
+            setIsGodMode(false);
+        }
+        else
+        {
+            setIsGodMode(true);
+        }
+
     }
 
     void targetBallSerach()
@@ -117,7 +131,10 @@ public class player : MonoBehaviour
             takeBall();
         }
     }
-
+    void setIsGodMode(bool n)
+    {
+        isGodMode = n;
+    }
     void setIsTake(bool n)
     {
         isTake = n;
@@ -147,6 +164,18 @@ public class player : MonoBehaviour
     }
     void addForceTo_newBall()
     {
+        if (isGodMode)
+        {
+            godThrow();
+        }
+        else
+        {
+            standerdThrow();
+        }
+
+    }
+    void standerdThrow()
+    {
         newBall.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
         newBall.GetComponent<Rigidbody>().AddForce(Vector3.up * 200);
         if (this.GetComponent<SpriteRenderer>().flipX)
@@ -159,7 +188,7 @@ public class player : MonoBehaviour
         }
     }
 
-    void addForceTo_newBall_NoMiss()
+    void godThrow()
     {
         float dx = Mathf.Abs(GameObject.Find("Basket").transform.position.x - newBall.transform.position.x);
         float dy = Mathf.Abs(GameObject.Find("Basket").transform.position.y - newBall.transform.position.y);
