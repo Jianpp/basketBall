@@ -6,7 +6,6 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     public bool IsGrounded;
-    public int score;
     public bool isTake;
     GameObject[] allTakeable;
     GameObject closetBall;
@@ -14,7 +13,7 @@ public class player : MonoBehaviour
     Transform lastclosetBall;
     Vector3 lastclosetBallScale;
 
-    UnityEngine.UI.Text velocityText, ScoreText;
+    UnityEngine.UI.Text velocityText;
     // Use this for initialization
     void Start()
     {

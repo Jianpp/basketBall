@@ -17,13 +17,13 @@ public class main : MonoBehaviour
     float cameraBaseDist;
     Vector3 cameraRELtarget;
     UnityEngine.UI.Text bestRecord, ScoreText;
-    public bool isDymCamer;
+    public bool isDynamicCamera;
 
 
     // Use this for initialization
     void Start()
     {
-        isDymCamer = true;
+        isDynamicCamera = true;
         score = 0;
         best = 0;
         gameStartTime = Time.time;
@@ -40,9 +40,9 @@ public class main : MonoBehaviour
         basefov = Camera.GetComponent<Camera>().fieldOfView;
 
     }
-    public void dymCamer()
+    public void DynamicCamera()
     {
-        isDymCamer = !isDymCamer;
+        isDynamicCamera = !isDynamicCamera;
     }
     public void throwIn()
     {
@@ -94,7 +94,7 @@ public class main : MonoBehaviour
     void cameraFellow()
     {
         Camera.transform.position = cameraRELtarget + player.transform.position;
-        if (isDymCamer)
+        if (isDynamicCamera)
         {
             float dist = Vector3.Distance(player.transform.position, Basket.transform.position) - cameraBaseDist;
             if (dist > 0)
