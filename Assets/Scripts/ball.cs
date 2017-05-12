@@ -18,7 +18,7 @@ public class ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		//杜子俄拉
     }
 
     void OnCollisionEnter(Collision other)
